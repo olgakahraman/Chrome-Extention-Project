@@ -1,47 +1,37 @@
-let myLeads = `["www.awesomelead.com]`;
 
-//1. turn the myLeads srting into an array
-myLeads = JSON.parse(myLeads);
-//2. Push a new value to the array
-myLeads.push("www.leads2.com");
-//3. Turn the array into a string again
-myLeads = JSON.stringify(myLeads);
-//4. Console.log the srting using typeof to verify that it's a string
-console.log(typeof myLeads);
+let myLeads = [];
+const inputEl = document.getElementById("input-el");
+const inputBtn = document.getElementById("input-btn");
+const ulEl = document.getElementById("ul-el");
 
+// ["lead1", "lead2"] or null
+let leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
+console.log(leadsFromLocalStorage);
+// 1. Check if leadsFromLocalStorage is truthy
+// 2. If so, set myLeads to its value and call renderLeads()
 
-
-const inputEl = document.querySelector("#input-el");
-const inputBtn = document.querySelector("#input-btn");
-const ulEl = document.querySelector("#ul-el");
-
-
+if (leadsFromLocalStorage) {
+  myLeads = leadsFromLocalStorage;
+  renderLeads();
+}
 
 inputBtn.addEventListener("click", function () {
   myLeads.push(inputEl.value);
-  inputEl.value = " ";
+  inputEl.value = "";
+  localStorage.setItem("myLeads", JSON.stringify(myLeads));
   renderLeads();
 });
 
 function renderLeads() {
   let listItems = "";
-
   for (let i = 0; i < myLeads.length; i++) {
     listItems += `
-      <li>
-      <a href = '${myLeads[i]} ' target='_blanc'>
-      ${myLeads[i]}
-      </a>
-      </li>
-      `;
-    console.log(listItems);
-    // create element
-    //set text content
-    //append to ul
-
-    //const li = document.createElememnt("li");
-    //li.textContent = myLeads[i]
-    //ulEl.append(li);
+            <li>
+                <a target='_blank' href='${myLeads[i]}'>
+                    ${myLeads[i]}
+                </a>
+            </li>
+        `;
   }
   ulEl.innerHTML = listItems;
 }
