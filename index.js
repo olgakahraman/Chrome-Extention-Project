@@ -1,14 +1,12 @@
-
 let myLeads = [];
 const inputEl = document.getElementById("input-el");
 const inputBtn = document.getElementById("input-btn");
 const ulEl = document.getElementById("ul-el");
 
-// ["lead1", "lead2"] or null
+
 let leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
 console.log(leadsFromLocalStorage);
-// 1. Check if leadsFromLocalStorage is truthy
-// 2. If so, set myLeads to its value and call renderLeads()
+
 
 if (leadsFromLocalStorage) {
   myLeads = leadsFromLocalStorage;
@@ -27,7 +25,7 @@ function renderLeads() {
   for (let i = 0; i < myLeads.length; i++) {
     listItems += `
             <li>
-                <a target='_blank' href='${myLeads[i]}'>
+                <a  href='${myLeads[i]} target='_blank''>
                     ${myLeads[i]}
                 </a>
             </li>
